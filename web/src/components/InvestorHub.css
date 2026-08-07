@@ -1,0 +1,201 @@
+.investor-hub {
+  background: var(--bhp-white);
+  padding: 40px 0;
+}
+
+/* Stacks fluidly on small viewports and scales out gracefully on desktop widths */
+.investor-hub__grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+/* Image scaling optimization mechanics */
+.investor-hub__image {
+  width: 100%;
+  height: 320px;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.investor-hub__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Middle Narrative Content Card Block */
+.investor-hub__card {
+  background: #edeae4; /* Custom warm gray color tone matching the original design precisely */
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  border-radius: 12px;
+  position: relative;
+}
+
+.investor-hub__custom-icon {
+  margin-bottom: 4px;
+}
+
+.investor-hub__card h3 {
+  font-size: clamp(24px, 3vw, 28px);
+  font-weight: 800;
+  color: #222222;
+  margin: 0;
+}
+
+.investor-hub__card p {
+  font-size: 15px;
+  line-height: 1.55;
+  color: #555555;
+  margin: 0;
+  max-width: 440px;
+}
+
+.investor-hub__cta-link {
+  color: #e76b00;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  margin-top: 24px; /* Default margin block isolation logic for mobile stack spacing */
+  transition: transform 0.2s ease;
+}
+
+.investor-hub__cta-link:hover {
+  transform: translateX(6px);
+}
+
+/* Right Ticker Main Parent Container */
+.investor-hub__ticker {
+  border-radius: 12px;
+  overflow: hidden;
+  background: #1e1e1e; /* Deep dark slate layout foundation */
+  display: flex;
+  flex-direction: column;
+}
+
+.ticker__tabs {
+  display: flex;
+}
+
+.ticker__tab {
+  flex: 1;
+  background: #2a2a28;
+  color: #aaaaaa;
+  border: none;
+  padding: 16px 8px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.ticker__tab.is-active {
+  background: #e76b00; /* Distinct orange tab activation flag accent */
+  color: #ffffff;
+}
+
+.ticker__body {
+  padding: 40px 32px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center balances numeric content presentation layers */
+  text-align: center;
+}
+
+.ticker__price {
+  font-size: clamp(48px, 5vw, 64px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 16px 0;
+  line-height: 1;
+}
+
+.ticker__label {
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.4;
+  margin: 0 0 24px 0;
+}
+
+/* Color thematic variant parameters mapping to real-time market data states */
+.ticker__change {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: clamp(22px, 2.5vw, 26px);
+  margin: 0 0 32px 0;
+}
+
+.ticker__change.is-up {
+  color: #3dfc70; /* Distinct positive green index tracking representation overlay */
+}
+
+.ticker__change.is-down {
+  color: #ff5c5c; /* Negative downturn indicator mapping overlay */
+}
+
+.ticker__timestamp {
+  font-size: 13px;
+  color: #999999;
+  margin: 0;
+}
+
+.ticker__currency {
+  font-size: 13px;
+  color: #999999;
+  margin: 4px 0 0 0;
+}
+
+/* ==========================================================================
+   Responsive Multi-Column Large Window Engine Rules Override
+   ========================================================================== */
+@media (min-width: 940px) {
+  .investor-hub__grid {
+    flex-direction: row;        
+    gap: 0;                     
+    align-items: stretch; /* Forces equal dimension row rendering across column grids */
+  }
+
+  .investor-hub__image,
+  .investor-hub__card,
+  .investor-hub__ticker {
+    flex: 1; 
+    min-width: 0; 
+    border-radius: 0; /* Smooths down interior corners inside group arrays */
+    height: auto;
+  }
+
+  /* Left element layout bounds configuration */
+  .investor-hub__image {
+    border-radius: 12px 0 0 12px;
+  }
+
+  /* Middle card updates */
+  .investor-hub__card {
+    padding: 48px;
+  }
+  
+  .investor-hub__cta-link {
+    margin-top: auto; /* Anchors arrow perfectly down to the bottom border edge boundary line */
+  }
+
+  /* Right element layout bounds configuration */
+  .investor-hub__ticker {
+    border-radius: 0 12px 12px 0;
+  }
+  
+  .ticker__body {
+    padding: 48px;
+    justify-content: center;
+  }
+}

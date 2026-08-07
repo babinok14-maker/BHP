@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Admin {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum MemberStatus {
+  Accepted
+  Pending
+  Rejected
+}
+
+model Member {
+  id             String       @id @default(uuid())
+  fullName       String
+  passportNumber String
+  jobPosition    String
+  age            Int
+  photoUrl       String?
+  status         MemberStatus @default(Accepted)
+  published      Boolean      @default(false)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  pdfFiles       PdfFile[]
+
+  @@index([published])
+  @@index([fullName])
+  @@index([status])
+}
+
+model PdfFile {
+  id          String   @id @default(uuid())
+  memberId    String
+  fileName    String
+  fileUrl     String
+  fileSize    Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  member      Member   @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  @@index([memberId])
+}

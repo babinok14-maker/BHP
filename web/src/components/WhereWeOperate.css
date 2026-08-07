@@ -1,0 +1,116 @@
+.where-we-operate {
+  padding: 20px 0;
+  background: var(--bhp-white);
+}
+
+/* Card Layout Wrapper */
+.where-we-operate__card {
+  display: grid;
+  grid-template-columns: 45% 55%;
+  background: #eef0f2;
+  border-radius: 12px; /* Smoothed corner rounding radius to match preview box */
+  overflow: hidden;
+  position: relative;
+  align-items: center;
+}
+
+/* LEFT SIDE CONTENT CONTAINER */
+.where-we-operate__content {
+  padding: 40px 20px 40px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 5;
+}
+
+.operate-icon {
+  margin-bottom: 16px;
+}
+
+.where-we-operate__content h2 {
+  font-size: clamp(24px, 3.2vw, 32px); /* Scaled down massive text sizes to banner proportions */
+  line-height: 1.1;
+  font-weight: 800;
+  color: #222;
+  margin: 0 0 16px 0;
+}
+
+.where-we-operate__content p {
+  font-size: clamp(14px, 1.5vw, 15px); /* Balanced narrative paragraph text tracking layout */
+  line-height: 1.5;
+  color: #555c63;
+  max-width: 320px;
+  margin: 0 0 24px 0;
+}
+
+.operate-link {
+  color: #e76b00;
+  display: inline-flex;
+  transition: transform 0.3s ease;
+  align-self: flex-start;
+}
+
+.operate-link:hover {
+  transform: translateX(6px);
+}
+
+/* RIGHT SIDE AUTOMATIC HALFTONE GLOBE MANIPULATION */
+.where-we-operate__image {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 40%; /* Overlaps across center boundaries perfectly */
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Pins map background elements precisely rightward without squishing */
+.globe-img {
+  position: absolute;
+  height: 140%; /* Scales slightly larger than the container block to crop cleanly */
+  width: auto;
+  max-width: none;
+  right: -80px;  /* Slight negative right shift to push the horizon edge out */
+  top: 50%;
+  transform: translateY(-50%); /* Locks vertical canvas centering mechanics */
+}
+
+/* ==========================================================================
+   Responsive Viewport Management Overrides
+   ========================================================================== */
+@media (max-width: 860px) {
+  .where-we-operate__card {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .where-we-operate__content {
+    padding: 36px 24px;
+    max-width: 100%;
+  }
+
+  .where-we-operate__image {
+    position: relative;
+    left: 0;
+    height: 220px;
+    width: 100%;
+  }
+
+  .globe-img {
+    height: 160%;
+    right: -40px;
+    top: 50%;
+  }
+}
+
+@media (max-width: 480px) {
+  .where-we-operate__content {
+    padding: 28px 20px;
+  }
+  
+  .where-we-operate__image {
+    height: 160px;
+  }
+}

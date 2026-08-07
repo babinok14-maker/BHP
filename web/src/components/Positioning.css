@@ -1,0 +1,117 @@
+/* Container for the whole section */
+.fl-contenttile-fullwidth-withcta {
+  display: block;
+  background-color: rgb(242, 244, 245);
+  padding: 40px 0;
+  width: 100%;
+  height: 400px;
+  color: rgb(33, 37, 41);
+  font-family: 'Graphik', Arial, Helvetica, sans-serif;
+  margin-bottom: 0;
+}
+
+/* Centered content wrapper */
+.fl-contentfull-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.fl-container {
+  width: 100%;
+}
+
+/* Info card container */
+.info-card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* The card title */
+.info-title h2 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: rgb(33, 37, 41);
+}
+
+/* The card description text */
+.info-description p {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  color: rgb(33, 37, 41);
+}
+
+/* CTA button container */
+.cta-button-outline {
+  margin-top: 10px;
+}
+
+/* Outline button styling */
+.btn-outline {
+  display: inline-block;
+  padding: 12px 30px;
+  border: 2px solid #ff5000;
+  color: #ff5000;
+  text-decoration: none;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.btn-outline:hover {
+  background-color: #ff5000;
+  color: #ffffff;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  .fl-contenttile-fullwidth-withcta {
+    padding: 40px 0;
+  }
+
+  .fl-contentfull-container {
+    padding: 0 24px;
+  }
+
+  .info-title h2 {
+    font-size: 1.75rem;
+    margin-bottom: 16px;
+  }
+
+  .info-description p {
+    font-size: 1rem;
+    margin-bottom: 24px;
+  }
+
+  .btn-outline {
+    padding: 10px 24px;
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .fl-contenttile-fullwidth-withcta {
+    padding: 32px 0;
+  }
+
+  .fl-contentfull-container {
+    padding: 0 16px;
+  }
+
+  .info-title h2 {
+    font-size: 1.5rem;
+  }
+
+  .info-description p {
+    font-size: 0.9375rem;
+  }
+
+  .btn-outline {
+    padding: 10px 20px;
+    font-size: 0.8125rem;
+  }
+}

@@ -1,0 +1,144 @@
+.header {
+  background: var(--bhp-black);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.header__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.header__icon-btn {
+  background: none;
+  border: none;
+  color: var(--bhp-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.header__icon-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.header__logo {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 26px;
+  letter-spacing: 0.02em;
+  color: var(--bhp-orange);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.header__right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.header__search {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  padding: 6px 10px;
+}
+
+.header__search-input {
+  background: transparent;
+  border: none;
+  color: var(--bhp-white);
+  outline: none;
+  min-width: 180px;
+  font-size: 14px;
+}
+
+.header__search-input::placeholder {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.header__search button {
+  padding: 0;
+}
+
+.header__link {
+  color: var(--bhp-white);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+
+.header__link:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.header__link--desktop {
+  display: none;
+}
+
+.header__lang {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  color: var(--bhp-white);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 10px;
+  border-radius: 4px;
+}
+
+.header__lang:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.header__menu {
+  background: var(--bhp-near-black);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.header__menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 8px 24px 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.header__menu a {
+  display: block;
+  color: var(--bhp-white);
+  font-size: 16px;
+  font-weight: 600;
+  padding: 13px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.header__menu-contact a {
+  color: var(--bhp-orange);
+}
+
+@media (min-width: 720px) {
+  .header__logo {
+    position: static;
+    transform: none;
+    margin-right: auto;
+    margin-left: 12px;
+  }
+
+  .header__link--desktop {
+    display: inline-block;
+  }
+}

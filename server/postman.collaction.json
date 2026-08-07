@@ -1,0 +1,311 @@
+{
+  "info": {
+    "name": "Company Admin API",
+    "description": "Test collection for the Node.js/Express backend (server/). Covers auth, public member endpoints, and admin-protected member CRUD.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000", "type": "string" },
+    { "key": "token", "value": "", "type": "string" },
+    { "key": "memberId", "value": "", "type": "string" },
+    { "key": "adminEmail", "value": "admin@company.com", "type": "string" },
+    { "key": "adminPassword", "value": "ChangeMe123!", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "{{baseUrl}}/health", "host": ["{{baseUrl}}"], "path": ["health"] }
+      },
+      "response": []
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json.success && json.data && json.data.token) {",
+                  "    pm.collectionVariables.set('token', json.data.token);",
+                  "    console.log('Token saved to {{token}}');",
+                  "}",
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Response has token', () => pm.expect(json.data.token).to.be.a('string'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{adminEmail}}\",\n  \"password\": \"{{adminPassword}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "login"]
+            },
+            "description": "Logs in and automatically saves the returned JWT into the {{token}} collection variable for use by all protected requests below."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Current Admin (me)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/me",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "me"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/logout",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "logout"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Public Members (no auth)",
+      "item": [
+        {
+          "name": "List Published Members",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Only published members returned', () => {",
+                  "    const json = pm.response.json();",
+                  "    json.data.forEach(m => pm.expect(m).to.not.have.property('published'));",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/members",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "members"]
+            },
+            "description": "Public endpoint consumed by web/. Always returns published members only, with a minimal field set (no 'published' flag, since every result is implicitly published)."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Single Published Member",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/members/{{memberId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "members", "{{memberId}}"]
+            },
+            "description": "Returns 404 if the member doesn't exist OR is unpublished — public visitors can't distinguish the two."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Admin Members (JWT protected)",
+      "item": [
+        {
+          "name": "List All Members (admin)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/api/members/admin/all?search=",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "members", "admin", "all"],
+              "query": [{ "key": "search", "value": "", "description": "Optional: filter by name or job position" }]
+            },
+            "description": "Returns every member (published and unpublished), full fields."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Single Member (admin)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/api/members/admin/{{memberId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "members", "admin", "{{memberId}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Member",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json.success && json.data && json.data.id) {",
+                  "    pm.collectionVariables.set('memberId', json.data.id);",
+                  "    console.log('memberId saved: ' + json.data.id);",
+                  "}",
+                  "pm.test('Status is 201', () => pm.response.to.have.status(201));",
+                  "pm.test('Member starts unpublished', () => pm.expect(json.data.published).to.eql(false));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fullName\": \"Jane Doe\",\n  \"passportNumber\": \"A1234567\",\n  \"jobPosition\": \"CTO\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/members/admin",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "members", "admin"]
+            },
+            "description": "Creates a member (unpublished by default) and saves the returned id into {{memberId}} for the requests below."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Member",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jobPosition\": \"Chief Technology Officer\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/members/admin/{{memberId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "members", "admin", "{{memberId}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Upload Member Photo",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "photo", "type": "file", "src": "" }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/members/admin/{{memberId}}/photo",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "members", "admin", "{{memberId}}", "photo"]
+            },
+            "description": "Select a local image file in the 'photo' form field (Postman: click 'Select Files'). Uploads to Cloudinary; response contains the new photoUrl."
+          },
+          "response": []
+        },
+        {
+          "name": "Publish Member",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/api/members/admin/{{memberId}}/publish",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "members", "admin", "{{memberId}}", "publish"]
+            },
+            "description": "After this, the member should appear in GET /api/members (public)."
+          },
+          "response": []
+        },
+        {
+          "name": "Unpublish Member",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/api/members/admin/{{memberId}}/unpublish",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "members", "admin", "{{memberId}}", "unpublish"]
+            },
+            "description": "After this, the member should disappear from GET /api/members (public)."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Member",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/api/members/admin/{{memberId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "members", "admin", "{{memberId}}"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Security Checks",
+      "item": [
+        {
+          "name": "List All Members WITHOUT token (should 401)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 401', () => pm.response.to.have.status(401));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/members/admin/all",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "members", "admin", "all"]
+            },
+            "description": "Deliberately sent with no Authorization header — confirms protected routes actually reject unauthenticated requests."
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

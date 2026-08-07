@@ -1,0 +1,42 @@
+/* Main section container */
+.fl-page-title {
+  background-color: #ffffff;
+  display: block;
+  width: 100%;
+  padding: 40px 0 20px 0;
+}
+
+/* Fluid container for content alignment */
+.fl-fluid-container {
+  padding: 0 24px;
+  margin: 0;
+  max-width: 100%;
+}
+
+/* Heading wrapper for potential additional meta-data */
+.fl-page-title__wrapper {
+  display: block;
+  text-align: left;
+}
+
+/* The actual H1 title styling */
+.fl-h1.title {
+  font-family: 'Graphik', Arial, Helvetica, sans-serif;
+  font-size: 35px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: #252525;
+  margin: 0;
+  text-transform: none;
+  letter-spacing: -0.01em;
+}
+
+/* Mobile Responsive adjustment */
+@media (max-width: 768px) {
+  .fl-h1.title {
+    font-size: 28px;
+  }
+  .fl-page-title {
+    padding: 30px 0 15px 0;
+  }
+}

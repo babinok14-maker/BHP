@@ -1,0 +1,167 @@
+.fl-quote-testimonial {
+  /* Gradient Background + Background Image Overlay */
+  background-image: linear-gradient(113.36deg, #252525 1.06%, #666666 100%),
+                    url('https://www.bhp.com/-/media/project/bhp1ip/bhp-com-en/images/quote-tile/2025/homepage-mike-henry-quote.jpg');
+  background-size: cover;
+  background-position: center;
+  color: #ffffff;
+  padding: 30px 0;
+  display: flex;
+  position: relative;
+  margin: 0;
+  height: 500px;
+}
+
+.quote-testimonial-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.fl-container {
+  width: 100%;
+}
+
+.quote-testimonial-card {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+/* CEO Image Styling */
+.quote-testimonial-author img {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 40px;
+  border: 4px solid #ff5000;
+}
+
+/* Quote Text Styling */
+.author-quote {
+  font-size: 24px;
+  line-height: 1.5;
+  font-style: italic;
+  margin-bottom: 20px;
+  position: relative;
+  font-family: 'Graphik', Arial, Helvetica, sans-serif;
+}
+
+.icon-quote img {
+  width: 40px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.author-name {
+  font-weight: bold;
+  font-size: 20px;
+  font-family: 'Graphik', Arial, Helvetica, sans-serif;
+}
+
+.author-position {
+  font-weight: normal;
+  color: #ff5000;
+  margin-left: 10px;
+}
+
+/* CTA Button Styling */
+.cta-button a {
+  color: #ffffff;
+  text-decoration: underline;
+  font-weight: bold;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 15px;
+  font-family: 'Graphik', Arial, Helvetica, sans-serif;
+  transition: color 0.3s ease;
+}
+
+.cta-button a:hover {
+  color: #ff5000;
+}
+
+.cta-arrow {
+  vertical-align: middle;
+  margin-left: 4px;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .fl-quote-testimonial {
+    padding: 40px 0;
+  }
+
+  .quote-testimonial-container {
+    max-width: 100%;
+    padding: 0 20px;
+  }
+
+  .quote-testimonial-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .quote-testimonial-author img {
+    width: 180px;
+    height: 180px;
+    margin-right: 0;
+    margin-bottom: 25px;
+  }
+
+  .author-quote {
+    margin-top: 20px;
+  }
+
+  .author-name {
+    font-size: 18px;
+    padding-top: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .fl-quote-testimonial {
+    padding: 30px 0;
+  }
+
+  .quote-testimonial-container {
+    padding: 0 16px;
+  }
+
+  .quote-testimonial-author img {
+    width: 140px;
+    height: 140px;
+  }
+
+  .author-quote {
+    font-size: 18px;
+  }
+
+  .author-name {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 360px) {
+  .fl-quote-testimonial {
+    padding: 25px 0;
+  }
+
+  .quote-testimonial-author img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .author-quote {
+    font-size: 16px;
+  }
+
+  .author-name {
+    font-size: 14px;
+  }
+}

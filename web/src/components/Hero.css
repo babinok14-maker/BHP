@@ -1,0 +1,112 @@
+.hero {
+  background: var(--bhp-white);
+  margin: 0;
+}
+
+
+.hero__intro {
+  padding: 48px 24px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.hero__copy h1 {
+  font-size: clamp(28px, 6vw, 56px);
+  font-weight: 800;
+  max-width: 100%;
+  line-height: 1.15;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.hero__subtitle {
+  margin-top: 14px;
+  font-size: clamp(16px, 2.5vw, 18px);
+  color: var(--bhp-gray-600);
+}
+
+.hero__cta {
+  font-size: clamp(14px, 2vw, 16px);
+}
+
+.hero__media {
+  position: relative;
+  width: 100%;
+  height: 450px;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+/* Layering rules logic added to cover elements and cleanly control layout visibility */
+.hero__video,
+.hero__image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+  z-index: 1;
+}
+
+/* Forces active layers over background layouts during frame transition blocks */
+.hero__video.is-active,
+.hero__image.is-active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 2;
+}
+
+.hero__scroll {
+  position: absolute;
+  left: 50%;
+  bottom: 34px;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bhp-black);
+  z-index: 3; /* Kept controls clearly sitting on top layer surfaces */
+}
+
+.hero__dots {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 3; /* Kept controls clearly sitting on top layer surfaces */
+}
+
+.hero__dot {
+  width: 28px;
+  height: 4px;
+  border-radius: 2px;
+  border: none;
+  background: rgba(255, 255, 255, 0.55);
+  padding: 0;
+  cursor: pointer;
+}
+
+.hero__dot.is-active {
+  background: var(--bhp-orange);
+}
+
+@media (min-width: 860px) {
+  .hero__intro {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 64px 24px 44px;
+  }
+}

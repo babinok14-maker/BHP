@@ -1,0 +1,145 @@
+:root {
+  /* Colors */
+  --bhp-orange: #E4670F;
+  --bhp-orange-dark: #C4560C;
+  --bhp-black: #141414;
+  --bhp-near-black: #1B1B1B;
+  --bhp-ink: #1F1E1D;
+  --bhp-gray-900: #2B2B2B;
+  --bhp-gray-600: #5B5B58;
+  --bhp-gray-400: #8A8A87;
+  --bhp-gray-200: #D9D7D1;
+  --bhp-bg-cream: #F3F1EC;
+  --bhp-bg-tan: #EFE6D8;
+  --bhp-bg-blue: #DCEAF3;
+  --bhp-white: #FFFFFF;
+
+  --font-display: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+
+  --container-max: 1280px;
+  --radius-sm: 6px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--bhp-ink);
+  background: var(--bhp-white);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  margin: 0;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 0 20px;
+  }
+}
+
+.section {
+  padding: 72px 0;
+}
+
+@media (max-width: 900px) {
+  .section {
+    padding: 52px 0;
+  }
+}
+
+.eyebrow-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  border-bottom: 2px solid var(--bhp-orange);
+  padding-bottom: 3px;
+  transition: gap 0.2s ease, opacity 0.2s ease;
+  width: fit-content;
+}
+
+.eyebrow-link:hover {
+  gap: 12px;
+}
+
+.eyebrow-link svg {
+  color: var(--bhp-orange);
+  flex-shrink: 0;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 14px 28px;
+  border-radius: 2px;
+  border: 2px solid var(--bhp-orange);
+  color: var(--bhp-orange);
+  background: transparent;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.btn:hover {
+  background: var(--bhp-orange);
+  color: var(--bhp-white);
+}
+
+:focus-visible {
+  outline: 3px solid var(--bhp-orange);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

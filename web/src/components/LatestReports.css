@@ -1,0 +1,111 @@
+.latest-reports {
+  background: var(--bhp-white);
+  margin-top: 0px; 
+  padding-top: 0px;
+}
+
+.latest-reports__card {
+  display: grid;
+  grid-template-columns: 1fr;
+  background: var(--bhp-bg-tan);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.latest-reports__copy {
+  padding: 36px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.latest-reports__copy h2 {
+  font-size: clamp(24px, 3.6vw, 32px);
+  font-weight: 800;
+}
+
+.latest-reports__subhead {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--bhp-ink);
+}
+
+.latest-reports__body {
+  font-size: 15px;
+  color: var(--bhp-gray-600);
+  line-height: 1.6;
+}
+
+.latest-reports__footer {
+  margin-top: 18px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(0,0,0,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.latest-reports__read-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--bhp-orange, #e76b00);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.latest-reports__pagination {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--bhp-gray-600);
+}
+
+.latest-reports__pagination button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--bhp-gray-200);
+  background: var(--bhp-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==========================================================================
+   Manual Crop Box Mechanics
+   ========================================================================== */
+.latest-reports__image-crop-box {
+  width: 100%;
+  height: 320px;        /* Fixes the mobile height so it does not get squished */
+  overflow: hidden;
+  position: relative;
+}
+
+.latest-reports__cropped-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;    /* Crops the excess image edges dynamically */
+  object-position: 85% center; /* 👈 Shifts focus rightward to preserve the workers */
+  display: block;
+}
+
+@media (min-width: 860px) {
+  .latest-reports__card {
+    grid-template-columns: 1fr 1fr; /* Splitting card 50/50 on desktop layout */
+  }
+
+  .latest-reports__copy {
+    padding: 48px;
+    justify-content: center;
+  }
+
+  .latest-reports__image-crop-box {
+    height: 100%;       /* Allows the grid box to automatically decide the height */
+    min-height: 420px;  /* Keeps proportional banner sizing relative to text blocks */
+  }
+}
